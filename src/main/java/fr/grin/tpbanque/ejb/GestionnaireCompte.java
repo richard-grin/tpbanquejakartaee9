@@ -9,7 +9,7 @@ import jakarta.persistence.TypedQuery;
 import java.util.List;
 
 /**
- *
+ * Gère la persistance pour l'entité CompteBancaire.
  * @author grin
  */
 @DataSourceDefinition(
@@ -39,6 +39,16 @@ public class GestionnaireCompte {
         TypedQuery query = 
                 em.createQuery("select c from CompteBancaire c", CompteBancaire.class);
         return query.getResultList();
+    }
+    
+    /**
+     * Retourne le nombre de comptes bancaires dans la base de données.
+     * @return 
+     */
+    public long nbComptes() {
+        String q = "select count(c) from CompteBancaire c";
+        TypedQuery<Long> query = em.createQuery(q, Long.class);
+        return query.getSingleResult();
     }
 
 }
