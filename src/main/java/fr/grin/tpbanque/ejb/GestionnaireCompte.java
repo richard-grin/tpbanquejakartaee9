@@ -19,7 +19,7 @@ import java.util.List;
         portNumber = 3306,
         user = "toto", // nom et
         password = "ric088", // mot de passe que vous avez donnés lors de la création de la base de données
-        databaseName = "banque",
+        databaseName = "banque2",
         properties = {
             "useSSL=false",
             "allowPublicKeyRetrieval=true"
