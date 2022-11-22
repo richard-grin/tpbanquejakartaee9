@@ -10,6 +10,7 @@ import java.util.List;
 
 /**
  * Gère la persistance pour l'entité CompteBancaire.
+ *
  * @author grin
  */
 @DataSourceDefinition(
@@ -36,19 +37,41 @@ public class GestionnaireCompte {
     }
 
     public List<CompteBancaire> getAllComptes() {
-        TypedQuery query = 
-                em.createQuery("select c from CompteBancaire c", CompteBancaire.class);
+        TypedQuery query
+                = em.createQuery("select c from CompteBancaire c", CompteBancaire.class);
         return query.getResultList();
     }
-    
+
     /**
      * Retourne le nombre de comptes bancaires dans la base de données.
-     * @return 
+     *
+     * @return
      */
     public long nbComptes() {
         String q = "select count(c) from CompteBancaire c";
         TypedQuery<Long> query = em.createQuery(q, Long.class);
         return query.getSingleResult();
+    }
+
+    public void transferer(CompteBancaire source, CompteBancaire destination,
+            int montant) {
+        source.retirer(montant);
+        destination.deposer(montant);
+        update(source);
+        update(destination);
+    }
+
+    public CompteBancaire update(CompteBancaire compteBancaire) {
+        return em.merge(compteBancaire);
+    }
+
+    /**
+     * Retourne le compte bancaire qui a le id passé en paramètre.
+     * @param id
+     * @return 
+     */
+    public CompteBancaire getCompte(Long id) {
+        return em.find(CompteBancaire.class, id);
     }
 
 }

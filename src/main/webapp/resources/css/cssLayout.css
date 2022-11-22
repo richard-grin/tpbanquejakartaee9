@@ -28,6 +28,12 @@
     width: 150px;
 }
 
+#content {
+    position: relative;
+    background-color: #ffffff;
+    padding: 5px;
+}
+
 .center_content {
     position: relative;
     background-color: #dddddd;

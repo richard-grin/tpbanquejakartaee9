@@ -15,30 +15,39 @@
             </ui:define>
 
             <ui:define name="content">
-                <p:dataTable value="#{listeComptes.allComptes}" var="item"
-                             paginator="true" rows="10"
-                             rowsPerPageTemplate="2,4,8,10"
-                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                             >
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Id"/>
-                        </f:facet>
-                        <h:outputText value="#{item.id}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Nom"/>
-                        </f:facet>
-                        <h:outputText value="#{item.nom}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Solde"/>
-                        </f:facet>
-                        <h:outputText value="#{item.solde}"/>
-                    </p:column>
-                </p:dataTable>
+                <h:form>
+                    <p:dataTable value="#{listeComptes.allComptes}" var="item"
+                                 paginator="true" rows="10"
+                                 rowsPerPageTemplate="2,4,8,10"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 >
+                        <p:column width="40" sortBy="#{item.id}">
+                            <f:facet name="header">
+                                <h:outputText value="Id"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column width="200" sortBy="#{item.nom}"
+                                  filterBy="#{item.nom}">
+                            <f:facet name="header">
+                                <h:outputText value="Nom"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nom}"/>
+                        </p:column>
+                        <p:column style="text-align:right;" width="70"
+                                  sortBy="#{item.solde}"
+                                  filterBy="#{item.solde}"
+                                  filterFunction="#{listeComptes.filtrerSolde}">
+                            <f:facet name="header">
+                                <h:outputText value="Solde"/>
+                            </f:facet>
+                            <h:outputText value="#{item.solde}">
+                                <f:convertNumber pattern="###,###,##0"/>
+                            </h:outputText>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+                <h:messages/>
             </ui:define>
 
         </ui:composition>
