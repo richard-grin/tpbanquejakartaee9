@@ -22,7 +22,7 @@ public class Init {
             // Création des 4 comptes
             gestionnaireCompte.creerCompte(new CompteBancaire("John Lennon", 150000));
             gestionnaireCompte.creerCompte(new CompteBancaire("Paul McCartney", 950000));
-            gestionnaireCompte.creerCompte(new CompteBancaire("Georges Harrisso", 100000));
+            gestionnaireCompte.creerCompte(new CompteBancaire("Georges Harrisson", 100000));
             gestionnaireCompte.creerCompte(new CompteBancaire("Ringo Starr", 20000));
         }
     }
