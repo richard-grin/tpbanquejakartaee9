@@ -1,6 +1,5 @@
 package fr.grin.tpbanque.jsf;
 
-
 import fr.grin.tpbanque.ejb.GestionnaireCompte;
 import fr.grin.tpbanque.entities.CompteBancaire;
 import fr.grin.tpbanque.jsf.util.Util;
@@ -40,11 +39,17 @@ public class ListeComptes implements Serializable {
 
     public boolean filtrerSolde(Object valeurTable, Object valeurFiltre, Locale locale) {
         try {
-        return (Integer)valeurTable >= Integer.valueOf((String)valeurFiltre);
+            return (Integer) valeurTable >= Integer.valueOf((String) valeurFiltre);
         } catch (NumberFormatException e) {
             // L’utilisateur a tapé autre chose qu’un nombre entier dans la zone pour filtrer
             return false;
         }
+    }
+
+    public String supprimerCompte(CompteBancaire compteBancaire) {
+        gestionnaireCompte.supprimerCompte(compteBancaire);
+        Util.addFlashInfoMessage("Compte de " + compteBancaire.getNom() + " supprimé");
+        return "listeComptes?faces-redirect=true";
     }
 
 }

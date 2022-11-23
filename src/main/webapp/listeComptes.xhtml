@@ -46,6 +46,13 @@
                                 <f:convertNumber pattern="###,###,##0"/>
                             </h:outputText>
                         </p:column>
+                        <p:column>
+                            <h:commandLink 
+                                action="#{listeComptes.supprimerCompte(item)}"
+                                title="Supprimer le compte de #{item.nom}">
+                                <h:graphicImage name="img/del.png"/>
+                            </h:commandLink>
+                        </p:column>
                     </p:dataTable>
                 </h:form>
                 <h:messages/>
