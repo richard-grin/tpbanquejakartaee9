@@ -3,7 +3,6 @@ package fr.grin.tpbanque.entities;
 import jakarta.persistence.CascadeType;
 import java.io.Serializable;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -25,7 +24,7 @@ public class CompteBancaire implements Serializable {
     private String nom;
     private int solde;
     
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<OperationBancaire> operations = new ArrayList<>();
     
     public CompteBancaire() {
