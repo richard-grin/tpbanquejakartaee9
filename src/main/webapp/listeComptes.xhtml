@@ -52,6 +52,19 @@
                                 title="Supprimer le compte de #{item.nom}">
                                 <h:graphicImage name="img/del.png"/>
                             </h:commandLink>
+                            <br/>
+                            <h:link outcome="changerNom?id=#{item.id}"
+                                    value="Changer nom"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText escape="false" 
+                                              value="Historique&lt;br/>opérations"/>
+                            </f:facet>
+                            <h:link value="Détails" outcome="listeOperations">
+                                <f:param name="idCompte" value="#{item.id}"/>
+                            </h:link>
+                                           
                         </p:column>
                     </p:dataTable>
                 </h:form>

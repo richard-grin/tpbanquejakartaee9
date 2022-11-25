@@ -1,13 +1,18 @@
 package fr.grin.tpbanque.entities;
 
+import jakarta.persistence.CascadeType;
 import java.io.Serializable;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- *
+ * Un compte bancaire.
  * @author grin
  */
 @Entity
@@ -17,17 +22,19 @@ public class CompteBancaire implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String nom;
-
     private int solde;
-
+    
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<OperationBancaire> operations = new ArrayList<>();
+    
     public CompteBancaire() {
     }
 
     public CompteBancaire(String nom, int solde) {
         this.nom = nom;
         this.solde = solde;
+        operations.add(new OperationBancaire("Création du compte", solde));
     }
 
     /**
@@ -69,9 +76,14 @@ public class CompteBancaire implements Serializable {
     public Long getId() {
         return id;
     }
+    
+    public List<OperationBancaire> getOperations() {  
+      return operations;  
+    } 
 
     public void deposer(int montant) {
         solde += montant;
+        operations.add(new OperationBancaire("Crédit", montant));
     }
 
     public void retirer(int montant) {
@@ -80,6 +92,7 @@ public class CompteBancaire implements Serializable {
         } else {
             solde = 0;
         }
+        operations.add(new OperationBancaire("Débit", -montant));
     }
 
     @Override
